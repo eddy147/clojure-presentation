@@ -1,10 +1,10 @@
-;; gorilla-repl.fileformat = 1
 (ns clojure-presentation.core)
 
 ;;Some brief examples
 (+ 1 2)
 (+ (+ 1 2) (+ 3 4))
 (+ 1 2 3 4)
+
 
 ;;Symbol bindings
 (let [a 4              ; bind symbol a to 4
@@ -18,6 +18,10 @@
         b (* b b)
         c (+ a b)]
     (Math/sqrt c)))
+
+;; map
+(map (fn [x] (* x x)) [1 2 3 4 5])
+(map #(* % %) [1 2 3 4 5])
 
 ;;multiple arities
 (defn argcount

@@ -1,10 +1,14 @@
-;; gorilla-repl.fileformat = 1
 (ns clojure-presentation.core)
 
 ;;Some brief examples
 (+ 1 2)
 (+ (+ 1 2) (+ 3 4))
 (+ 1 2 3 4)
+
+;; Short intro to immutability
+(def a 4)
+(inc a)
+(a)
 
 ;;Symbol bindings
 (let [a 4              ; bind symbol a to 4
@@ -19,12 +23,17 @@
         c (+ a b)]
     (Math/sqrt c)))
 
+;; map
+(map (fn [x] (* x x)) [1 2 3 4 5])
+(map #(* % %) [1 2 3 4 5])
+
 ;;multiple arities
 (defn argcount
   ([] 0)
   ([x] 1)
   ([x y] 2)
   ([x y & more] (+ (argcount x y) (count more))))
+
 
 ;;Metadata
 (defn make-greetings
@@ -92,6 +101,7 @@
     #{:filip :toxi}
     #{:filip :ricardo}})
 
+
 ;; Adding elements
 (conj [1 2 3] 4 5 6)
 (conj {:a 1 :b 2} [:c 3] [:d 4])
@@ -102,30 +112,22 @@
 (assoc {:a 23} :b 42 :a 88)
 
 (def db {:toxi {}
-         :nardove
-         {:name "Ricardo"
-          :urls ["http://nardove.com"]
+         :nardove 
+         {:name "Ricardo",
+          :urls ["http://nardove.com"],
           :address {:city "Glasgow"}}})
 (assoc-in db [:nardove :address :city] "Aberdeen")
+
 
 ;;Removing
 (dissoc {:a 23 :b 42} :b)
 (disj #{10 20 30} 20)
 (pop [1 2 3 4])
 
+
 ;;Immutability
 (def v [1 2 3 4])
 (def v2 (conj v 5))
-
-;;Laziness
-(take 4 (range)) ;;never do (range) in the repl
-
-;;Destructering
-(defn f [v]
-  (let [[x y z] v]
-    (* x y z)))
-
-(f [1 2 3])
 
 ;;Sequence
 (first [1 2 3 4])
@@ -163,6 +165,7 @@
 
 (interleave [:clojure :lisp :scheme] [2007 1958 1970])
 (interpose "," #{"cyan" "black" "yellow" "magenta"})
+
 
 ;; Polymorphism
 (defmulti encounter (fn [x y] [(:Species x) (:Species y)]))
